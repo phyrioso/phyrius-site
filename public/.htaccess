@@ -3,6 +3,10 @@
 # Compressão, cache, tipos MIME e segurança básica.
 # ============================================================
 
+# ---------- Ficheiro de entrada ----------
+# Garante que o index.html estático ganha ao index.php de instalações antigas.
+DirectoryIndex index.html index.php
+
 # ---------- Compressão ----------
 <IfModule mod_brotli.c>
   AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/javascript application/javascript application/json image/svg+xml
