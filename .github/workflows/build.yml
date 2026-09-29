@@ -1,0 +1,41 @@
+name: Compilar e publicar
+
+# A cada push para main, compila o site e envia a pasta out/ para o ramo "producao".
+# O Plesk esta ligado a esse ramo, por isso o servidor recebe sempre HTML ja pronto.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compilar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Compilar
+        run: npm run build
+
+      - name: Publicar no ramo producao
+        run: |
+          cd out
+          git init -q
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -q -m "Build de ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:producao
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,66 @@
+# ============================================================
+# phyrius.pt — Apache
+# Compressão, cache, tipos MIME e segurança básica.
+# ============================================================
+
+# ---------- Compressão ----------
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---------- Tipos MIME ----------
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+  AddType image/avif .avif
+  AddType image/webp .webp
+</IfModule>
+
+# ---------- Cache ----------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Ficheiros com hash no nome: podem ficar um ano
+  <FilesMatch "\.(js|css|woff2)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(jpg|jpeg|png|webp|avif|svg|ico|mp4|webm)$">
+    ExpiresDefault "access plus 6 months"
+  </FilesMatch>
+  # HTML volta a ser verificado sempre
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ---------- HTTPS e www ----------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ---------- Redirects das páginas antigas ----------
+Redirect 301 /branding /servicos/#branding
+Redirect 301 /audiovisual /servicos/#video
+Redirect 301 /marketing /servicos/#conteudo
+Redirect 301 /inteligencia-artificial /servicos/#ia
+
+# ---------- Página de erro ----------
+ErrorDocument 404 /404.html
+
+# ---------- Segurança ----------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+Options -Indexes

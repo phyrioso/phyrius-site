@@ -11,13 +11,55 @@ npm install     # uma vez
 npm run dev     # http://localhost:3000 (com recarregamento automático)
 ```
 
+## Ver noutro dispositivo da rede local
+
+```bash
+npm run ip       # mostra o IP do Mac, ex.: 192.168.1.42
+npm run dev:lan  # servidor aberto à rede local
+```
+
+Depois, no telemóvel ou noutro computador da mesma rede: `http://192.168.1.42:3000`.
+Na primeira vez, o macOS pergunta se permite ligações — responder **Permitir**.
+
+Para mostrar a versão já compilada (mais fiel ao que vai para o servidor):
+
+```bash
+npm run build
+npm run preview   # http://192.168.1.42:4321
+```
+
 ## Publicar
+
+O site publica-se sozinho. A cada `git push` para `main`:
+
+1. O GitHub Actions instala, compila (`npm run build`) e envia o resultado para o ramo **`producao`**
+2. O Plesk, ligado a esse ramo, puxa os ficheiros para a document root
+
+```
+main (código)  →  GitHub Actions  →  producao (site compilado)  →  Plesk  →  phyrius.pt
+```
+
+**Importante:** o Plesk tem de apontar para o ramo `producao`, nunca para `main`. O `main`
+tem código-fonte, que o servidor não sabe correr.
+
+Para compilar à mão, sem publicar:
 
 ```bash
 npm run build   # gera a pasta out/
+npm run preview # vê o resultado em http://localhost:4321
 ```
 
-Depois envia-se o conteúdo de `out/` para a document root do domínio (via Git no Plesk ou FTP).
+### Configuração do Plesk
+
+| Campo | Valor |
+| --- | --- |
+| Repositório | `https://github.com/phyrioso/phyrius-site.git` |
+| Branch | `producao` |
+| Deployment mode | Automatic |
+| Deployment path | `httpdocs` (ou a pasta do subdomínio, para staging) |
+
+O ficheiro `public/.htaccess` vai junto e trata de compressão, cache, HTTPS,
+redirects das páginas antigas e cabeçalhos de segurança.
 
 ## Onde está o quê
 
