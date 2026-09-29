@@ -1,0 +1,148 @@
+/* ============================================================
+   Phyrius — tokens da marca
+   Trocar valores aqui muda o site inteiro.
+   ============================================================ */
+
+@font-face { font-family: 'Nexa'; src: url('/fonts/Nexa-Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Nexa'; src: url('/fonts/NexaRegular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Nexa'; src: url('/fonts/Nexa-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Nexa'; src: url('/fonts/NexaBlack.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+
+:root {
+  /* cor */
+  --bg: #0b0508;
+  --surface: #140a0e;
+  --surface-2: #1d0e15;
+  --line: rgba(237, 236, 234, 0.1);
+  --line-strong: rgba(237, 236, 234, 0.22);
+  --fg: #edecea;
+  --muted: rgba(237, 236, 234, 0.66);
+  --red: #e20614;
+  --red-dark: #7d0510;
+  --white: #ffffff;
+  --glow: radial-gradient(ellipse 60% 70% at 78% 38%, #4a0a17 0%, #22070e 45%, var(--bg) 78%);
+
+  /* tipografia */
+  --font: 'Nexa', 'Helvetica Neue', Arial, sans-serif;
+  --text-display: clamp(3rem, 7.6vw, 7rem);
+  --text-h1: clamp(2.4rem, 5.2vw, 4.6rem);
+  --text-h2: clamp(1.9rem, 3.2vw, 2.9rem);
+  --text-h3: clamp(1.4rem, 2vw, 1.7rem);
+  --text-body: 1.0625rem;
+  --text-label: 0.75rem;
+
+  /* espaço e forma */
+  --container: 1440px;
+  --gutter: clamp(1.25rem, 4vw, 5rem);
+  --section-y: clamp(4.5rem, 9vw, 7.5rem);
+  --radius-card: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* movimento */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.35s;
+  --dur-base: 0.8s;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: var(--text-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 { margin: 0; font-weight: 700; line-height: 0.98; letter-spacing: -0.015em; text-transform: uppercase; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img, svg, video { display: block; max-width: 100%; }
+button, input, textarea, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+::selection { background: var(--red); color: var(--white); }
+
+/* ---------- estrutura ---------- */
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-top: var(--section-y); }
+.section-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-top: 1.4rem; border-top: 1px solid var(--line); margin-bottom: 2.5rem;
+}
+.label { font-size: var(--text-label); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.label .num { color: var(--red); }
+.lead { font-size: clamp(1.05rem, 1.5vw, 1.3rem); color: var(--muted); max-width: 38ch; }
+.red { color: var(--red); }
+
+/* ---------- botões e chips ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.85rem;
+  padding: 1.15rem 1.7rem; border: 1px solid transparent; border-radius: var(--radius-pill);
+  font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  cursor: pointer; transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--red { background: var(--red); color: var(--white); }
+.btn--red:hover { background: #ff1a28; }
+.btn--white { background: var(--white); color: var(--red); }
+.btn--ghost { border-color: var(--line-strong); color: var(--fg); }
+.btn--ghost:hover { border-color: var(--fg); }
+.btn .arrow { transition: transform var(--dur-fast) var(--ease); }
+.btn:hover .arrow { transform: translateX(4px); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.55rem 1rem; border: 1px solid var(--line-strong); border-radius: var(--radius-pill);
+  font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.chip::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--red); }
+.chip--light { border-color: rgba(255, 255, 255, 0.45); color: var(--white); }
+.chip--light::before { background: var(--white); }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); }
+
+/* ---------- padrão da marca ---------- */
+.orbit { position: absolute; pointer-events: none; user-select: none; z-index: 0; }
+.orbit img { width: 100%; height: 100%; }
+
+/* ---------- estados iniciais de animação ---------- */
+[data-reveal] { opacity: 0; }
+[data-split] > .line-mask { overflow: hidden; }
+.no-motion [data-reveal] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ---------- cortina de entrada ---------- */
+.preloader {
+  position: fixed; inset: 0; z-index: 100; background: var(--bg);
+  display: grid; place-content: center; gap: 2rem; justify-items: center;
+  clip-path: inset(0% 0% 0% 0%);
+}
+.preloader__logo { opacity: 0; transform: translateY(14px); }
+.preloader__logo img { width: min(220px, 50vw); }
+.preloader__barra { width: min(220px, 50vw); height: 2px; background: rgba(237, 236, 234, 0.12); overflow: hidden; }
+.preloader__barra i { display: block; height: 100%; background: var(--red); transform: scaleX(0); transform-origin: left; }
+
+/* ---------- cursor ---------- */
+.cursor {
+  position: fixed; top: 0; left: 0; z-index: 90; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--red); pointer-events: none; mix-blend-mode: screen;
+}
+@media (pointer: coarse) { .cursor { display: none; } }
+
+/* ---------- máscaras de texto ---------- */
+[data-split] { opacity: 0; }
+.no-motion [data-split] { opacity: 1; }
+/* As máscaras não podem cortar acentos: dá-se folga em cima e recupera-se em baixo. */
+[data-split] .linha,
+[data-split] .linha-mask { overflow: hidden; padding-top: 0.18em; margin-top: -0.18em; padding-bottom: 0.08em; }
+
+/* ---------- estados iniciais ---------- */
+[data-tilt] { will-change: transform; }
+[data-zoom] { will-change: transform; }
