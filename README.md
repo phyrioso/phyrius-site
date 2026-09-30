@@ -66,11 +66,14 @@ redirects das páginas antigas e cabeçalhos de segurança.
 | Pasta | O que tem |
 | --- | --- |
 | `content/site.ts` | **Todo o texto do site.** Editar aqui muda o site inteiro |
-| `app/` | As páginas: Home, Serviços, Portfólio, projeto, Contactos |
+| `content/landings.ts` | **Todo o texto das landing pages** `/100` e `/48` |
+| `app/` | As páginas: Home, Serviços, Portfólio, projeto, Contactos, `/100`, `/48` |
 | `components/sections/` | As secções da Home |
+| `components/landing/` | As secções das landing pages |
 | `components/ui/Bits.tsx` | Botões, chips, etiquetas, padrão |
 | `app/globals.css` | **Tokens da marca**: cores, tipografia, espaçamento |
 | `styles/components.css` | Estilos das secções |
+| `styles/landings.css` | Estilos das landing pages (classes `land-*`) |
 | `lib/gsap.ts` + `components/Motion.tsx` | Sistema de animação |
 | `public/` | Fontes Nexa, logótipo, padrão, imagens, `contacto.php` |
 
@@ -110,4 +113,7 @@ O `public/contacto.php` recebe o POST e envia por email. Antes de publicar:
 - [ ] Três testemunhos
 - [ ] Desafio / O que fizemos / Resultado de cada projeto em `content/site.ts`
 - [ ] Logótipos dos clientes (hoje são os nomes escritos)
-- [ ] Links reais das landing pages Phyrius 100 e 48
+- [x] Landing pages Phyrius 100 (`/100`) e Phyrius 48 (`/48`)
+- [ ] Fotografia das landing pages (os `[Foto campanha]` em `content/landings.ts`)
+- [ ] Preços e prazos dos 48 serviços, se forem para mostrar na página
+- [ ] Página de Política de Privacidade (o rodapé já lhe chama)

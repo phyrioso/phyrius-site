@@ -28,6 +28,7 @@ $empresa  = $limpar($_POST['empresa'] ?? '');
 $email    = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
 $telefone = $limpar($_POST['telefone'] ?? '');
 $procura  = $limpar($_POST['procura'] ?? '');
+$origem   = $limpar($_POST['origem'] ?? '');
 $mensagem = trim($_POST['mensagem'] ?? '');
 
 if ($nome === '' || $email === false || $mensagem === '') {
@@ -36,11 +37,13 @@ if ($nome === '' || $email === false || $mensagem === '') {
     exit;
 }
 
-$assunto = sprintf('[Site] %s — %s', $nome, $procura !== '' ? $procura : 'Contacto');
+$etiqueta = $origem !== '' ? $origem : 'Site';
+$assunto = sprintf('[%s] %s — %s', $etiqueta, $nome, $procura !== '' ? $procura : 'Contacto');
 
 $corpo = <<<TXT
 Novo pedido de contacto em phyrius.pt
 
+Origem:   {$etiqueta}
 Nome:     {$nome}
 Empresa:  {$empresa}
 Email:    {$email}

@@ -49,13 +49,32 @@ export function Orbit({ className, parallax, spin }: { className?: string; paral
   );
 }
 
-/** Escreve texto com {palavras} a vermelho. */
-export function Rich({ text }: { text: string }) {
-  const parts = text.split(/(\{[^}]+\})/g);
+/**
+ * Escreve texto com {palavras} a vermelho.
+ * Com `quebras`, cada \n vira uma quebra de linha a sério (<br>), que o
+ * SplitText respeita: o white-space: pre-line não sobrevive ao split.
+ */
+export function Rich({ text, quebras }: { text: string; quebras?: boolean }) {
+  const partes = text.split(/(\{[^}]+\})/g);
+
+  const escrever = (t: string, chave: string) => {
+    if (!quebras || !t.includes('\n')) return t;
+    return t.split('\n').map((linha, i) => (
+      <span key={`${chave}-${i}`}>
+        {i > 0 ? <br /> : null}
+        {linha}
+      </span>
+    ));
+  };
+
   return (
     <>
-      {parts.map((p, i) =>
-        p.startsWith('{') ? <span key={i} className="red">{p.slice(1, -1)}</span> : <span key={i}>{p}</span>,
+      {partes.map((p, i) =>
+        p.startsWith('{') ? (
+          <span key={i} className="red">{escrever(p.slice(1, -1), `r${i}`)}</span>
+        ) : (
+          <span key={i}>{escrever(p, `t${i}`)}</span>
+        ),
       )}
     </>
   );

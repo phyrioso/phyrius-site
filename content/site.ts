@@ -21,8 +21,8 @@ export const site = {
 export const nav = [
   { label: 'Serviços', href: '/servicos' },
   { label: 'Portfólio', href: '/portfolio' },
-  { label: 'Phyrius 100', href: '/#solucoes' },
-  { label: 'Phyrius 48', href: '/#solucoes' },
+  { label: 'Phyrius 100', href: '/100' },
+  { label: 'Phyrius 48', href: '/48' },
   { label: 'Contactos', href: '/contactos' },
 ];
 
@@ -67,7 +67,7 @@ export const solucoes = [
       'Estratégia, conteúdo, design, vídeo e digital, com uma equipa dedicada e acompanhamento contínuo. Marketing a 100%.',
     tags: ['Contínuo', 'Equipa dedicada', 'Preço fixo mensal'],
     cta: 'Conhecer a Phyrius 100',
-    href: '#',
+    href: '/100',
   },
   {
     id: 'phyrius-48',
@@ -79,7 +79,7 @@ export const solucoes = [
       'Um post, uma campanha, um vídeo. Escolha entre 48 serviços pré-definidos, com preço fechado e execução rápida, sem avenças nem contratos.',
     tags: ['On-demand', 'Sem contrato', '48 serviços à escolha'],
     cta: 'Conhecer a Phyrius 48',
-    href: '#',
+    href: '/48',
   },
 ];
 

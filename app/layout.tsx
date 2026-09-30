@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import '../styles/components.css';
+import '../styles/landings.css';
 import SmoothScroll from '@/components/SmoothScroll';
 import Motion from '@/components/Motion';
 import Preloader from '@/components/Preloader';

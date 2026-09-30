@@ -6,11 +6,11 @@ const base = 'https://phyrius.pt';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paginas = ['', '/servicos', '/portfolio', '/contactos'].map((p) => ({
+  const paginas = ['', '/servicos', '/portfolio', '/100', '/48', '/contactos'].map((p) => ({
     url: `${base}${p}/`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
-    priority: p === '' ? 1 : 0.8,
+    priority: p === '' ? 1 : p === '/100' || p === '/48' ? 0.9 : 0.8,
   }));
 
   const casos = projetos.map((p) => ({

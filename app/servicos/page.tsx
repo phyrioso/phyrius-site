@@ -72,7 +72,7 @@ export default function ServicosPage() {
               <Rich text={'Como prefere trabalhar {connosco?}'} />
             </h2>
             <div className="choose" data-reveal="up" data-stagger>
-              <a className="c-red" href="#">
+              <Link className="c-red" href="/100">
                 <div className="row">
                   <span>Todas as áreas, todos os meses</span>
                   <span className="mark"><Arrow /></span>
@@ -81,8 +81,8 @@ export default function ServicosPage() {
                   <h3>Phyrius 100</h3>
                   <p style={{ opacity: 0.9, marginTop: '0.6rem' }}>O seu departamento de marketing, pronto a usar.</p>
                 </div>
-              </a>
-              <a className="c-dark" href="#">
+              </Link>
+              <Link className="c-dark" href="/48">
                 <div className="row">
                   <span>Só o que precisa, quando precisa</span>
                   <span className="mark"><Arrow /></span>
@@ -91,7 +91,7 @@ export default function ServicosPage() {
                   <h3>Phyrius 48</h3>
                   <p style={{ color: 'var(--muted)', marginTop: '0.6rem' }}>48 serviços à escolha, sem avenças nem contratos.</p>
                 </div>
-              </a>
+              </Link>
             </div>
             <p style={{ marginTop: '2rem', color: 'var(--muted)' }}>
               Não sabe qual escolher? <Link href="/contactos" style={{ color: 'var(--fg)', borderBottom: '1px solid var(--red)' }}>Falamos primeiro.</Link>
